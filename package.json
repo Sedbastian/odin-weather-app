@@ -1,0 +1,28 @@
+{
+  "name": "odin-weather-app",
+  "version": "1.0.0",
+  "description": "https://www.theodinproject.com/lessons/node-path-javascript-weather-app",
+  "private": true,
+  "scripts": {
+		"build": "webpack",
+		"server": "webpack serve --open",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sedbastian/odin-weather-app.git"
+  },
+  "author": "Lifri Morlon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sedbastian/odin-weather-app/issues"
+  },
+  "homepage": "https://github.com/Sedbastian/odin-weather-app#readme",
+  "devDependencies": {
+    "css-loader": "^6.7.1",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.11.0"
+  }
+}
