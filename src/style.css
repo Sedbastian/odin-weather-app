@@ -13,3 +13,11 @@ input {
 button {
 	font-size: 1.5rem;
 }
+
+.divCargando {
+	color: white;
+}
+
+.resultado {
+	color: white;
+}

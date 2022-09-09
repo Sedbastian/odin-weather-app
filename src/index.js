@@ -1,18 +1,7 @@
 import "./style.css";
-import { buscar } from "./domModule";
-
-import { dropDown } from "@lifrimorlon/uxlifri";
+import { buscarDOM } from "./domModule";
 
 const botonBuscar = document.querySelector("button");
-botonBuscar.addEventListener("click", buscar);
+botonBuscar.addEventListener("click", buscarDOM);
 
 
-
-const menuSegundo = {
-	Name: "Rarísimo",
-  "Corchi Polin": "leindk",
-  "Chacul Manen": "leika",
-  "Carpit Lonmon": "lonm"
-};
-
-dropDown("buscarLugar", "2", menuSegundo);

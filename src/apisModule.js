@@ -1,3 +1,5 @@
+import { encontradoDOM } from "./domModule";
+
 const apiKey = "a89d97a5f8156e276d76abbdc33383e3";
 
 function lugarAcoordenadas(lugar) {
@@ -11,7 +13,7 @@ function lugarAcoordenadas(lugar) {
 			return response.json();
 		})
 		.then(function (response) {
-			console.log(response);
+			encontradoDOM(response);
 			return(response);
 		})
 		.catch(function(error) {
@@ -20,4 +22,8 @@ function lugarAcoordenadas(lugar) {
 		})
 }
 
-export { lugarAcoordenadas };
+function infoMeteo(lat, lon) {
+	console.log(lat, lon);
+}
+
+export { lugarAcoordenadas, infoMeteo };
