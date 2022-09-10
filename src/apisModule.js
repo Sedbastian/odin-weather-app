@@ -1,6 +1,8 @@
-import { encontradoDOM } from "./domModule";
+import { encontradoDOM, errorLugarAcoordenadasDOM, errorInfoMeteoDOM, mostrarInfoMeteoDOM } from "./domModule";
 
 const apiKey = "a89d97a5f8156e276d76abbdc33383e3";
+let unidades = "metric"; 
+// ó imperial
 
 function lugarAcoordenadas(lugar) {
   let promesaData = fetch(
@@ -17,13 +19,29 @@ function lugarAcoordenadas(lugar) {
 			return(response);
 		})
 		.catch(function(error) {
-			console.log(error);
+			errorLugarAcoordenadasDOM(error);
 			return("error");
 		})
 }
 
 function infoMeteo(lat, lon) {
-	console.log(lat, lon);
+	let promesaData = fetch(
+    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${unidades}&lang=sp&appid=${apiKey}`,
+    { mode: "cors" }
+	);
+	
+	promesaData
+		.then(function (response) {
+			return response.json();
+		})
+		.then(function (response) {
+			mostrarInfoMeteoDOM(response);
+			return(response);
+		})
+		.catch(function(error) {
+			errorInfoMeteoDOM(error);
+			return(error);
+		})
 }
 
 export { lugarAcoordenadas, infoMeteo };
