@@ -5,7 +5,7 @@ import {
   unidades
 } from "./apisModule";
 
-import { fromUnixTime } from "date-fns";
+import { format, fromUnixTime } from "date-fns";
 
 const buscarInput = document.querySelector("input");
 
@@ -160,8 +160,8 @@ function mostrarInfoMeteoDOM(response) {
       1
     )} ${grados}`;
     primerDiv.appendChild(sensTerm);
-	}
-	
+  }
+
   contenedorInfo.appendChild(primerDiv);
 
   // segundoDiv
@@ -177,7 +177,7 @@ function mostrarInfoMeteoDOM(response) {
     segundoDiv.appendChild(nubosidad);
   }
 
-	if (
+  if (
     response.hasOwnProperty("main") &&
     response.main.hasOwnProperty("humidity")
   ) {
@@ -186,7 +186,7 @@ function mostrarInfoMeteoDOM(response) {
     segundoDiv.appendChild(humedad);
   }
 
-	if (
+  if (
     response.hasOwnProperty("main") &&
     response.main.hasOwnProperty("pressure")
   ) {
@@ -197,100 +197,121 @@ function mostrarInfoMeteoDOM(response) {
 
   contenedorInfo.appendChild(segundoDiv);
 
-	// tercerDiv
-	let unidadVelocidad = "";
-	if (unidades === "metric") {
-		unidadVelocidad = "km/h";
-	} else if (unidades === "imperial") {
-		unidadVelocidad = "m/h";
-	}
+  // tercerDiv
+  let unidadVelocidad = "";
+  if (unidades === "metric") {
+    unidadVelocidad = "km/h";
+  } else if (unidades === "imperial") {
+    unidadVelocidad = "m/h";
+  }
 
-	const tercerDiv = document.createElement("div");
-	tercerDiv.classList.add("tercerDiv");
+  const tercerDiv = document.createElement("div");
+  tercerDiv.classList.add("tercerDiv");
 
-	const tituloViento = document.createElement("div");
-	tituloViento.classList.add("tituloViento");
-	tituloViento.textContent = "Viento";
-	tercerDiv.appendChild(tituloViento);
+  const tituloViento = document.createElement("div");
+  tituloViento.classList.add("tituloViento");
+  tituloViento.textContent = "Viento";
+  tercerDiv.appendChild(tituloViento);
 
-	if (
+  if (
     response.hasOwnProperty("wind") &&
     response.wind.hasOwnProperty("speed")
   ) {
-		let speedConverted = "";
-		if (unidadVelocidad = "km/h") {
-			speedConverted = response.wind.speed * 3.6;
-		} else if (unidadVelocidad = "m/h") {
-			speedConverted = response.wind.speed;
-		}
+    let speedConverted = "";
+    if ((unidadVelocidad = "km/h")) {
+      speedConverted = response.wind.speed * 3.6;
+    } else if ((unidadVelocidad = "m/h")) {
+      speedConverted = response.wind.speed;
+    }
 
     const speed = document.createElement("div");
-    speed.textContent = `Velocidad: ${speedConverted.toFixed(0)} ${unidadVelocidad}`;
+    speed.textContent = `Velocidad: ${speedConverted.toFixed(
+      0
+    )} ${unidadVelocidad}`;
     tercerDiv.appendChild(speed);
   }
 
-	if (
-    response.hasOwnProperty("wind") &&
-    response.wind.hasOwnProperty("deg")
-  ) {
-		const deg = response.wind.deg;
-		let direccionViento = "";
-		if (deg > 337.5 && deg <= 22.5) {
-			direccionViento = "Norte";
-		} else if (deg > 22.5 && deg <= 67.5) {
-			direccionViento = "Nor-Este";
-		} else if (deg > 67.5 && deg <= 112.5) {
-			direccionViento = "Este";
-		} else if (deg > 112.5 && deg <= 157.5) {
-			direccionViento = "Sur-Este";
-		} else if (deg > 157.5 && deg <= 202.5) {
-			direccionViento = "Sur";
-		} else if (deg > 202.5 && deg <= 247.5) {
-			direccionViento = "Sur-Oeste";
-		} else if (deg > 247.5 && deg <= 292.5) {
-			direccionViento = "Oeste";
-		} else if (deg > 292.5 && deg <= 337.5) {
-			direccionViento = "Nor-Oeste";
-		}
+  if (response.hasOwnProperty("wind") && response.wind.hasOwnProperty("deg")) {
+    const deg = response.wind.deg;
+    let direccionViento = "";
+    if (deg > 337.5 && deg <= 22.5) {
+      direccionViento = "Norte";
+    } else if (deg > 22.5 && deg <= 67.5) {
+      direccionViento = "Nor-Este";
+    } else if (deg > 67.5 && deg <= 112.5) {
+      direccionViento = "Este";
+    } else if (deg > 112.5 && deg <= 157.5) {
+      direccionViento = "Sur-Este";
+    } else if (deg > 157.5 && deg <= 202.5) {
+      direccionViento = "Sur";
+    } else if (deg > 202.5 && deg <= 247.5) {
+      direccionViento = "Sur-Oeste";
+    } else if (deg > 247.5 && deg <= 292.5) {
+      direccionViento = "Oeste";
+    } else if (deg > 292.5 && deg <= 337.5) {
+      direccionViento = "Nor-Oeste";
+    }
 
     const direccion = document.createElement("div");
     direccion.textContent = `Desde el ${direccionViento}`;
     tercerDiv.appendChild(direccion);
   }
 
-	if (
-    response.hasOwnProperty("wind") &&
-    response.wind.hasOwnProperty("gust")
-  ) {
-		let speedConverted = "";
-		if (unidadVelocidad = "km/h") {
-			speedConverted = response.wind.gust * 3.6;
-		} else if (unidadVelocidad = "m/h") {
-			speedConverted = response.wind.gust;
-		}
+  if (response.hasOwnProperty("wind") && response.wind.hasOwnProperty("gust")) {
+    let speedConverted = "";
+    if ((unidadVelocidad = "km/h")) {
+      speedConverted = response.wind.gust * 3.6;
+    } else if ((unidadVelocidad = "m/h")) {
+      speedConverted = response.wind.gust;
+    }
 
     const gust = document.createElement("div");
-    gust.textContent = `Ráfagas de: ${speedConverted.toFixed(0)} ${unidadVelocidad}`;
+    gust.textContent = `Ráfagas de: ${speedConverted.toFixed(
+      0
+    )} ${unidadVelocidad}`;
     tercerDiv.appendChild(gust);
   }
 
-	contenedorInfo.appendChild(tercerDiv);
-	
-	// cuartoDiv
-	const cuartoDiv = document.createElement("div");
-	cuartoDiv.classList.add("cuartoDiv");
+  contenedorInfo.appendChild(tercerDiv);
 
-	const latitud = document.createElement("div");
-	latitud.textContent = `Latitud: ${response.coord.lat}`;
-	cuartoDiv.appendChild(latitud);
+  // cuartoDiv
+  const cuartoDiv = document.createElement("div");
+  cuartoDiv.classList.add("cuartoDiv");
 
-	const longitud = document.createElement("div");
-	longitud.textContent = `Longitud: ${response.coord.lon}`;
-	cuartoDiv.appendChild(longitud);
+  const salidaSol = document.createElement("div");
+  salidaSol.textContent = `Salida del Sol: ${format(
+    fromUnixTime(response.sys.sunrise),
+    "h:mm aa"
+  )}`;
+  cuartoDiv.appendChild(salidaSol);
 
-	contenedorInfo.appendChild(cuartoDiv);
+  const puestaSol = document.createElement("div");
+  puestaSol.textContent = `Puesta del Sol: ${format(
+    fromUnixTime(response.sys.sunset),
+    "h:mm aa"
+  )}`;
+  cuartoDiv.appendChild(puestaSol);
 
-	console.log(fromUnixTime(response.sys.sunrise));
+  const latitud = document.createElement("div");
+  latitud.textContent = `Latitud: ${response.coord.lat}`;
+  cuartoDiv.appendChild(latitud);
+
+  const longitud = document.createElement("div");
+  longitud.textContent = `Longitud: ${response.coord.lon}`;
+  cuartoDiv.appendChild(longitud);
+
+	const zonaHoraria = document.createElement("div");
+	let zH;
+	if (response.timezone > 0) {
+		zH = `+${response.timezone / 3600}`
+	} else if (response.timezone < 0) {
+		zH = response.timezone / 3600;
+	}
+	zonaHoraria.textContent = `Zona Horaria: GMT${zH}`;
+	cuartoDiv.appendChild(zonaHoraria);
+
+  contenedorInfo.appendChild(cuartoDiv);
+
   console.log(response);
   infoMeteoPronostico(response.coord.lat, response.coord.lon);
 }
@@ -300,8 +321,7 @@ function mostrarInfoMeteoPronosticoDOM(response) {
 }
 
 function errorLugarAcoordenadasDOM() {
-  contenedorInfo.textContent =
-    `Hubo un error buscando el lugar, intente nuevamente. ${error}`;
+  contenedorInfo.textContent = `Hubo un error buscando el lugar, intente nuevamente. ${error}`;
 }
 
 function errorInfoMeteoDOM(error) {
@@ -309,8 +329,7 @@ function errorInfoMeteoDOM(error) {
 }
 
 function errorInfoMeteoPronosticoDOM() {
-  contenedorInfo.textContent =
-    `Hubo un error cargando el pronóstico meteorológico, intente nuevamente. ${error}`;
+  contenedorInfo.textContent = `Hubo un error cargando el pronóstico meteorológico, intente nuevamente. ${error}`;
 }
 
 export {
