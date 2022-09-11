@@ -5,6 +5,8 @@ import {
   unidades
 } from "./apisModule";
 
+import { fromUnixTime } from "date-fns";
+
 const buscarInput = document.querySelector("input");
 
 const contenedorInfo = document.createElement("div");
@@ -272,8 +274,23 @@ function mostrarInfoMeteoDOM(response) {
     tercerDiv.appendChild(gust);
   }
 
-  contenedorInfo.appendChild(tercerDiv);
+	contenedorInfo.appendChild(tercerDiv);
+	
+	// cuartoDiv
+	const cuartoDiv = document.createElement("div");
+	cuartoDiv.classList.add("cuartoDiv");
 
+	const latitud = document.createElement("div");
+	latitud.textContent = `Latitud: ${response.coord.lat}`;
+	cuartoDiv.appendChild(latitud);
+
+	const longitud = document.createElement("div");
+	longitud.textContent = `Longitud: ${response.coord.lon}`;
+	cuartoDiv.appendChild(longitud);
+
+	contenedorInfo.appendChild(cuartoDiv);
+
+	console.log(fromUnixTime(response.sys.sunrise));
   console.log(response);
   infoMeteoPronostico(response.coord.lat, response.coord.lon);
 }
