@@ -1,62 +1,122 @@
 @font-face {
-	font-family: Raleway-Medium;
-	src:    local("Raleway-Medium"),
-					url(./Raleway-Medium.ttf);
+  font-family: Raleway-Medium;
+  src: local("Raleway-Medium"), url(./Raleway-Medium.ttf);
 }
 
 body {
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: max-content 1fr max-content;
-	
-	height: 95vh;
-	background-color: rgb(32, 0, 64);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content 1fr max-content;
 
-	font-family: Raleway-Medium;
+  height: 95vh;
+  background-color: rgb(32, 0, 64);
+
+  font-family: Raleway-Medium;
 }
 
 header h1 {
-	color: seagreen;
+  color: seagreen;
 }
 
 main .contenedorInfo {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-auto-rows: min-content;
-	gap: 2rem;
-	margin: 0.5rem;
-	border-style: solid;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	grid-auto-rows: min-content;
+	justify-items: center;
+  gap: 2rem;
+  margin: 0.5rem;
+  border-style: solid;
+  border-color: white;
+
+  color: white;
+}
+
+main .contenedorInfo .primerDiv {
+  border-style: solid;
 	border-color: white;
-	
-	color: white;
+	text-align: center;
+	font-size: 1.5rem;
+}
+
+main .contenedorInfo .primerDiv .lugar {
+	margin: 1rem;
+	font-size: 2rem;
+}
+
+main .contenedorInfo .primerDiv .temperatura {
+	font-size: 4rem;
+}
+
+main .contenedorInfo .segundoDiv {
+	border-style: solid;
+  border-color: white;
+}
+
+main .contenedorInfo .contenedor {
+	display: grid;
+	grid-template-columns: max-content max-content;
+	grid-template-rows: max-content max-content;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	margin: 1rem;
+	margin-bottom: 2rem;
+}
+
+main .contenedorInfo .contenedor .titulo {
+	justify-self: start;
+	margin: 0.5rem;
+}
+
+main .contenedorInfo .contenedor img {
+	justify-self: end;
+	height: 3rem;
+	margin: 0.5rem;
+}
+main .contenedorInfo .contenedor .valor {
+	grid-column: 1 / 3;
+	font-size: 3rem;
+	margin-top: 0;
+}
+main .contenedorInfo .tercerDiv {
+  border-style: solid;
+  border-color: white;
+}
+
+main .contenedorInfo .tercerDiv .tituloViento {
+	font-size: 2rem;
+}
+
+main .contenedorInfo .cuartoDiv {
+  border-style: solid;
+  border-color: white;
 }
 
 input {
-	background-color: rgb(64, 0, 128);
-	color: white;
-	font-size: 1.5rem;
+  background-color: rgb(64, 0, 128);
+  color: white;
+  font-size: 1.5rem;
 }
 
 button {
-	font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .contenedorInfo {
-	
 }
 
 .resultados {
-	border-style: solid;
-	border-color: orangered;
-	width: max-content;
+  border-style: solid;
+  border-color: orangered;
+  width: max-content;
 }
 
 .resultado {
-	margin: 0.5rem;
-	color: white;
+  margin: 0.5rem;
+  color: white;
 }
 
 footer {
-	text-align: center;
-	color: white;
+  text-align: center;
+  color: white;
 }

@@ -97,9 +97,13 @@ function requestInfoMeteoDOM(lugar, lat, lon) {
 
   contenedorInfo.textContent = "";
 
-  const h2lugar = document.createElement("h2");
-  h2lugar.textContent = lugar;
-  contenedorInfo.appendChild(h2lugar);
+  const primerDiv = document.createElement("div");
+  primerDiv.classList.add("primerDiv");
+  const lugarDiv = document.createElement("div");
+  lugarDiv.classList.add("lugar");
+  lugarDiv.textContent = lugar;
+  primerDiv.appendChild(lugarDiv);
+  contenedorInfo.appendChild(primerDiv);
 
   const divCargando = document.createElement("div");
   divCargando.classList.add("divCargando");
@@ -113,8 +117,7 @@ function mostrarInfoMeteoDOM(response) {
   document.querySelector(".divCargando").remove();
 
   // primerDiv
-  const primerDiv = document.createElement("div");
-  primerDiv.classList.add("primerDiv");
+  const primerDiv = document.querySelector(".primerDiv");
 
   if (response.hasOwnProperty("weather")) {
     response.weather.forEach(element => {
@@ -128,6 +131,7 @@ function mostrarInfoMeteoDOM(response) {
       }
 
       const icon = document.createElement("div");
+      icon.classList.add("icon");
       if (element.hasOwnProperty("icon")) {
         const img = document.createElement("img");
         img.src = `http://openweathermap.org/img/wn/${element.icon}@4x.png`;
@@ -148,6 +152,7 @@ function mostrarInfoMeteoDOM(response) {
     }
 
     const temperatura = document.createElement("div");
+    temperatura.classList.add("temperatura");
     temperatura.textContent = `${response.main.temp.toFixed(1)} ${grados}`;
     primerDiv.appendChild(temperatura);
   }
@@ -172,27 +177,72 @@ function mostrarInfoMeteoDOM(response) {
     response.hasOwnProperty("clouds") &&
     response.clouds.hasOwnProperty("all")
   ) {
-    const nubosidad = document.createElement("div");
-    nubosidad.textContent = `Nubosidad: ${response.clouds.all}%`;
-    segundoDiv.appendChild(nubosidad);
+    const nubosidadContenedor = document.createElement("div");
+    nubosidadContenedor.classList.add("contenedor");
+
+    const nubosidadIcon = document.createElement("img");
+    nubosidadIcon.src = "./weather-cloudy-48-regular.svg";
+    nubosidadContenedor.appendChild(nubosidadIcon);
+
+    const nubosidadTitulo = document.createElement("div");
+    nubosidadTitulo.classList.add("titulo");
+    nubosidadTitulo.textContent = "Nubosidad";
+    nubosidadContenedor.appendChild(nubosidadTitulo);
+
+    const nubosidadValor = document.createElement("div");
+    nubosidadValor.classList.add("valor");
+    nubosidadValor.textContent = `${response.clouds.all}%`;
+    nubosidadContenedor.appendChild(nubosidadValor);
+
+    segundoDiv.appendChild(nubosidadContenedor);
   }
 
   if (
     response.hasOwnProperty("main") &&
     response.main.hasOwnProperty("humidity")
   ) {
-    const humedad = document.createElement("div");
-    humedad.textContent = `Humedad: ${response.main.humidity}%`;
-    segundoDiv.appendChild(humedad);
+    const humedadContenedor = document.createElement("div");
+    humedadContenedor.classList.add("contenedor");
+
+    const humedadIcon = document.createElement("img");
+    humedadIcon.src = "./humedad.svg";
+    humedadContenedor.appendChild(humedadIcon);
+
+    const humedadTitulo = document.createElement("div");
+    humedadTitulo.classList.add("titulo");
+    humedadTitulo.textContent = "Humedad";
+    humedadContenedor.appendChild(humedadTitulo);
+
+    const humedadValor = document.createElement("div");
+    humedadValor.classList.add("valor");
+    humedadValor.textContent = `${response.main.humidity}%`;
+    humedadContenedor.appendChild(humedadValor);
+
+    segundoDiv.appendChild(humedadContenedor);
   }
 
   if (
     response.hasOwnProperty("main") &&
     response.main.hasOwnProperty("pressure")
   ) {
-    const presion = document.createElement("div");
-    presion.textContent = `Presión: ${response.main.pressure} hPa`;
-    segundoDiv.appendChild(presion);
+    const presionContenedor = document.createElement("div");
+    presionContenedor.classList.add("contenedor");
+
+    const presionIcon = document.createElement("img");
+    presionIcon.src = "./pressure.svg";
+    presionContenedor.appendChild(presionIcon);
+
+    const presionTitulo = document.createElement("div");
+    presionTitulo.classList.add("titulo");
+    presionTitulo.textContent = "Presión";
+    presionContenedor.appendChild(presionTitulo);
+
+    const presionValor = document.createElement("div");
+    presionValor.classList.add("valor");
+    presionValor.textContent = `${response.main.pressure} hPa`;
+    presionContenedor.appendChild(presionValor);
+
+    segundoDiv.appendChild(presionContenedor);
   }
 
   contenedorInfo.appendChild(segundoDiv);
@@ -208,10 +258,19 @@ function mostrarInfoMeteoDOM(response) {
   const tercerDiv = document.createElement("div");
   tercerDiv.classList.add("tercerDiv");
 
+  const vientoContenedor = document.createElement("div");
+  vientoContenedor.classList.add("contenedor");
+
+  const vientoIcon = document.createElement("img");
+  vientoIcon.src = "./wind.svg";
+  vientoContenedor.appendChild(vientoIcon);
+
   const tituloViento = document.createElement("div");
   tituloViento.classList.add("tituloViento");
   tituloViento.textContent = "Viento";
-  tercerDiv.appendChild(tituloViento);
+  vientoContenedor.appendChild(tituloViento);
+
+  tercerDiv.appendChild(vientoContenedor);
 
   if (
     response.hasOwnProperty("wind") &&
@@ -224,11 +283,27 @@ function mostrarInfoMeteoDOM(response) {
       speedConverted = response.wind.speed;
     }
 
-    const speed = document.createElement("div");
-    speed.textContent = `Velocidad: ${speedConverted.toFixed(
+    const speedContenedor = document.createElement("div");
+    speedContenedor.classList.add("contenedor");
+
+    const speedIcon = document.createElement("img");
+    speedIcon.src = "./wind-stream.svg";
+    speedContenedor.appendChild(speedIcon);
+
+    const speedTitulo = document.createElement("div");
+    speedTitulo.classList.add("titulo");
+    speedTitulo.textContent = "Constante";
+    speedContenedor.appendChild(speedTitulo);
+
+    const speedValor = document.createElement("div");
+		speedValor.classList.add("valor");
+		speedValor.textContent = `${speedConverted.toFixed(
       0
-    )} ${unidadVelocidad}`;
-    tercerDiv.appendChild(speed);
+		)} ${unidadVelocidad}`;
+		speedContenedor.appendChild(speedValor);
+
+		tercerDiv.appendChild(speedContenedor);
+
   }
 
   if (response.hasOwnProperty("wind") && response.wind.hasOwnProperty("deg")) {
@@ -300,15 +375,15 @@ function mostrarInfoMeteoDOM(response) {
   longitud.textContent = `Longitud: ${response.coord.lon}`;
   cuartoDiv.appendChild(longitud);
 
-	const zonaHoraria = document.createElement("div");
-	let zH;
-	if (response.timezone > 0) {
-		zH = `+${response.timezone / 3600}`
-	} else if (response.timezone < 0) {
-		zH = response.timezone / 3600;
-	}
-	zonaHoraria.textContent = `Zona Horaria: GMT${zH}`;
-	cuartoDiv.appendChild(zonaHoraria);
+  const zonaHoraria = document.createElement("div");
+  let zH;
+  if (response.timezone > 0) {
+    zH = `+${response.timezone / 3600}`;
+  } else if (response.timezone < 0) {
+    zH = response.timezone / 3600;
+  }
+  zonaHoraria.textContent = `Zona Horaria: GMT${zH}`;
+  cuartoDiv.appendChild(zonaHoraria);
 
   contenedorInfo.appendChild(cuartoDiv);
 
