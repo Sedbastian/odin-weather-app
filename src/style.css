@@ -25,17 +25,19 @@ main .contenedorInfo {
 	justify-items: center;
   gap: 2rem;
   margin: 0.5rem;
-  border-style: solid;
-  border-color: white;
-
+	margin-top: 2rem;
   color: white;
 }
 
 main .contenedorInfo .primerDiv {
-  border-style: solid;
+  border-style: none;
 	border-color: white;
 	text-align: center;
 	font-size: 1.5rem;
+
+	background-color: rgb(24, 0, 48);
+	border-radius: 1rem;
+	box-shadow: 0 0 0.5rem white;
 }
 
 main .contenedorInfo .primerDiv .lugar {
@@ -48,7 +50,7 @@ main .contenedorInfo .primerDiv .temperatura {
 }
 
 main .contenedorInfo .segundoDiv {
-	border-style: solid;
+	border-style: none;
   border-color: white;
 }
 
@@ -61,6 +63,11 @@ main .contenedorInfo .contenedor {
 	text-align: center;
 	margin: 1rem;
 	margin-bottom: 2rem;
+	padding: 1rem;
+
+	background-color: rgb(24, 0, 48);
+	border-radius: 1rem;
+	box-shadow: 0 0 0.5rem white;
 }
 
 main .contenedorInfo .contenedor .titulo {
@@ -78,8 +85,9 @@ main .contenedorInfo .contenedor .valor {
 	font-size: 3rem;
 	margin-top: 0;
 }
+
 main .contenedorInfo .tercerDiv {
-  border-style: solid;
+  border-style: none;
   border-color: white;
 }
 
@@ -87,8 +95,18 @@ main .contenedorInfo .tercerDiv .tituloViento {
 	font-size: 2rem;
 }
 
+main .contenedorInfo .tercerDiv .contenedor .flecha {
+	grid-column: 1 / 3;
+	grid-row: 1 / 2;
+	font-size: 5rem;
+}
+
+main .contenedorInfo .tercerDiv .contenedor .direccion {
+	font-size: 1rem;
+}
+
 main .contenedorInfo .cuartoDiv {
-  border-style: solid;
+  border-style: none;
   border-color: white;
 }
 
