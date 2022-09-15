@@ -12,12 +12,19 @@
       <h1>App de Información Meteorológica</h1>
     </header>
     <main class="buscarLugar">
-      <input type="text" id="lugar" />
-      <button>Buscar</button>
+      <div class="buscarXnombre">
+        <input type="text" id="lugar" />
+        <button class="lugarBoton">Buscar Lugar</button>
+      </div>
+      <div class="buscarCoordenadas">
+        <input type="text" id="latitud" placeholder="Latidud" />
+        <input type="text" id="longitud" placeholder="Longitud" />
+        <button class="coordenadasBoton">Buscar Coordenadas</button>
+      </div>
     </main>
     <footer>
       <div>
-        Información meteorológica por openweathermap.org
+        Información meteorológica provista por openweathermap.org
       </div>
       <div>
         Copyleft © Sedbastian
