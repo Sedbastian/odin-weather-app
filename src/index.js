@@ -1,7 +1,8 @@
 import "./style.css";
-import { buscarDOM } from "./domModule";
+import { buscarLugarDOM, llamarBuscarCoordenadasDOM } from "./domModule";
 
-const botonBuscar = document.querySelector("button");
-botonBuscar.addEventListener("click", buscarDOM);
+const botonBuscarLugar = document.querySelector(".lugarBoton");
+botonBuscarLugar.addEventListener("click", buscarLugarDOM);
 
-
+const botonBuscarCoordenadas = document.querySelector(".coordenadasBoton");
+botonBuscarCoordenadas.addEventListener("click", llamarBuscarCoordenadasDOM);

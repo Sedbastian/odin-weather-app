@@ -14,14 +14,43 @@ contenedorInfo.classList.add("contenedorInfo");
 const divBuscar = document.querySelector(".buscarLugar");
 divBuscar.appendChild(contenedorInfo);
 
-function buscarDOM() {
+function buscarLugarDOM() {
   const resultados = document.querySelector(".resultados");
   if (resultados) {
     resultados.remove();
   }
   contenedorInfo.textContent = "Buscando lugar...";
 
-  lugarAcoordenadas(buscarInput.value);
+  if (buscarInput.value.toLocaleLowerCase().includes("venancia")) {
+    requestInfoMeteoDOM(
+      "Finca La Venancia, Santa Vera Cruz",
+      "-28.678611",
+      "-66.958122"
+    );
+  } else if (
+    buscarInput.value.toLocaleLowerCase().includes("vera cruz") ||
+    buscarInput.value.toLocaleLowerCase().includes("veracruz")
+  ) {
+    requestInfoMeteoDOM(
+      "Santa Vera Cruz, La Rioja",
+      "-28.678611",
+      "-66.958122"
+    );
+  } else if (buscarInput.value.toLocaleLowerCase().includes("constancia")) {
+		requestInfoMeteoDOM(
+			"La Constancia, Delta del Tigre",
+			"-34.308113",
+			"-58.567997"
+		)
+	} else {
+    lugarAcoordenadas(buscarInput.value);
+  }
+}
+
+function llamarBuscarCoordenadasDOM() {
+  const lat = document.querySelector("#latitud").value;
+  const lon = document.querySelector("#longitud").value;
+  requestInfoMeteoDOM(`Latidud: ${lat}, Longitud: ${lon}`, lat, lon);
 }
 
 function encontradoDOM(response) {
@@ -155,8 +184,8 @@ function mostrarInfoMeteoDOM(response) {
     temperatura.classList.add("temperatura");
     temperatura.textContent = `${response.main.temp.toFixed(1)} ${grados}`;
     primerDiv.appendChild(temperatura);
-	}
-	
+  }
+
   if (
     response.hasOwnProperty("main") &&
     response.main.hasOwnProperty("feels_like")
@@ -180,7 +209,7 @@ function mostrarInfoMeteoDOM(response) {
   ) {
     segundoDiv.appendChild(
       crearContenedor(
-        "./weather-cloudy-48-regular.svg",
+        "./resources/weather-cloudy-48-regular.svg",
         "Nubosidad",
         `${response.clouds.all}%`
       )
@@ -192,7 +221,11 @@ function mostrarInfoMeteoDOM(response) {
     response.main.hasOwnProperty("humidity")
   ) {
     segundoDiv.appendChild(
-      crearContenedor("./humedad.svg", "Humedad", `${response.main.humidity}%`)
+      crearContenedor(
+        "./resources/humedad.svg",
+        "Humedad",
+        `${response.main.humidity}%`
+      )
     );
   }
 
@@ -202,7 +235,7 @@ function mostrarInfoMeteoDOM(response) {
   ) {
     segundoDiv.appendChild(
       crearContenedor(
-        "./pressure.svg",
+        "./resources/pressure.svg",
         "Presión",
         `${response.main.pressure} hPa`
       )
@@ -219,7 +252,7 @@ function mostrarInfoMeteoDOM(response) {
   vientoContenedor.classList.add("contenedor");
 
   const vientoIcon = document.createElement("img");
-  vientoIcon.src = "./wind.svg";
+  vientoIcon.src = "./resources/wind.svg";
   vientoContenedor.appendChild(vientoIcon);
 
   const tituloViento = document.createElement("div");
@@ -239,8 +272,9 @@ function mostrarInfoMeteoDOM(response) {
     const deg = response.wind.deg;
     let direccionViento = "";
 
-    if (deg > 337.5 && deg <= 22.5) {
-      direccionViento = "Norte";
+    if (deg > 337.5 && deg <= 360 || deg >= 0 && deg <= 22.5) {
+			direccionViento = "Norte";
+			flechaDiv.style.transform = "rotate(180deg)";
     } else if (deg > 22.5 && deg <= 67.5) {
       direccionViento = "Nor-Este";
       flechaDiv.style.transform = "rotate(225deg)";
@@ -294,7 +328,7 @@ function mostrarInfoMeteoDOM(response) {
 
     tercerDiv.appendChild(
       crearContenedor(
-        "./wind-stream.svg",
+        "./resources/wind-stream.svg",
         "Constante",
         `${speedConverted.toFixed(0)} ${unidadVelocidad}`
       )
@@ -311,7 +345,7 @@ function mostrarInfoMeteoDOM(response) {
 
     tercerDiv.appendChild(
       crearContenedor(
-        "./wind-gusts.svg",
+        "./resources/wind-gusts.svg",
         "Ráfagas de",
         `${speedConverted.toFixed(0)} ${unidadVelocidad}`
       )
@@ -326,7 +360,7 @@ function mostrarInfoMeteoDOM(response) {
 
   cuartoDiv.appendChild(
     crearContenedor(
-      "./sunrise.svg",
+      "./resources/sunrise.svg",
       "Salida del Sol",
       format(fromUnixTime(response.sys.sunset), "h:mm aa")
     )
@@ -334,18 +368,26 @@ function mostrarInfoMeteoDOM(response) {
 
   cuartoDiv.appendChild(
     crearContenedor(
-      "./sunset.svg",
+      "./resources/sunset.svg",
       "Puesta del Sol",
       format(fromUnixTime(response.sys.sunset), "h:mm aa")
     )
   );
 
   cuartoDiv.appendChild(
-    crearContenedor("./world-latitude.svg", "Latitud", response.coord.lat)
+    crearContenedor(
+      "./resources/world-latitude.svg",
+      "Latitud",
+      response.coord.lat
+    )
   );
 
   cuartoDiv.appendChild(
-    crearContenedor("./world-longitude.svg", "Longitud", response.coord.lon)
+    crearContenedor(
+      "./resources/world-longitude.svg",
+      "Longitud",
+      response.coord.lon
+    )
   );
 
   let zonaHoraria;
@@ -357,7 +399,7 @@ function mostrarInfoMeteoDOM(response) {
 
   cuartoDiv.appendChild(
     crearContenedor(
-      "./moment-timezone.svg",
+      "./resources/moment-timezone.svg",
       "Zona Horaria",
       `GMT${zonaHoraria}`
     )
@@ -406,7 +448,8 @@ function errorInfoMeteoPronosticoDOM() {
 }
 
 export {
-  buscarDOM,
+  buscarLugarDOM,
+  llamarBuscarCoordenadasDOM,
   encontradoDOM,
   mostrarInfoMeteoDOM,
   mostrarInfoMeteoPronosticoDOM,
