@@ -11,7 +11,7 @@ const buscarInput = document.querySelector("input");
 
 const contenedorInfo = document.createElement("div");
 contenedorInfo.classList.add("contenedorInfo");
-const divBuscar = document.querySelector(".buscarLugar");
+const divBuscar = document.querySelector("main");
 divBuscar.appendChild(contenedorInfo);
 
 function buscarLugarDOM() {
@@ -435,7 +435,7 @@ function mostrarInfoMeteoPronosticoDOM(response) {
   console.log(response);
 }
 
-function errorLugarAcoordenadasDOM() {
+function errorLugarAcoordenadasDOM(error) {
   contenedorInfo.textContent = `Hubo un error buscando el lugar, intente nuevamente. ${error}`;
 }
 
@@ -443,7 +443,7 @@ function errorInfoMeteoDOM(error) {
   contenedorInfo.textContent = `Hubo un error cargando la información meteorológica, intente nuevamente. ${error}`;
 }
 
-function errorInfoMeteoPronosticoDOM() {
+function errorInfoMeteoPronosticoDOM(error) {
   contenedorInfo.textContent = `Hubo un error cargando el pronóstico meteorológico, intente nuevamente. ${error}`;
 }
 
