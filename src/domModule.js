@@ -362,7 +362,7 @@ function mostrarInfoMeteoDOM(response) {
     crearContenedor(
       "./resources/sunrise.svg",
       "Salida del Sol",
-      format(fromUnixTime(response.sys.sunset), "h:mm aa")
+      format(fromUnixTime(response.sys.sunrise), "h:mm aa")
     )
   );
 
