@@ -13,7 +13,7 @@ let unidades = "metric";
 
 function lugarAcoordenadas(lugar) {
   let promesaData = fetch(
-    `http://api.openweathermap.org/geo/1.0/direct?q=${lugar}&limit=5&appid=${apiKey}`,
+    `https://api.openweathermap.org/geo/1.0/direct?q=${lugar}&limit=5&appid=${apiKey}`,
     { mode: "cors" }
   );
 
