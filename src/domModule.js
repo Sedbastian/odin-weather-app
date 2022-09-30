@@ -406,20 +406,22 @@ function mostrarInfoMeteoDOM(response) {
     )
   );
 
-  let zonaHoraria;
-  if (response.timezone > 0) {
-    zonaHoraria = `+${response.timezone / 3600}`;
-  } else if (response.timezone < 0) {
-    zonaHoraria = response.timezone / 3600;
-  }
+  if (response.hasOwnProperty("timezone")) {
+    let zonaHoraria;
+    if (response.timezone >= 0) {
+      zonaHoraria = `+${response.timezone / 3600}`;
+    } else if (response.timezone < 0) {
+      zonaHoraria = response.timezone / 3600;
+    }
 
-  cuartoDiv.appendChild(
-    crearContenedor(
-      "./resources/moment-timezone.svg",
-      "Zona Horaria",
-      `GMT${zonaHoraria}`
-    )
-  );
+    cuartoDiv.appendChild(
+      crearContenedor(
+        "./resources/moment-timezone.svg",
+        "Zona Horaria",
+        `GMT${zonaHoraria}`
+      )
+    );
+  }
 
   contenedorInfo.appendChild(cuartoDiv);
 
