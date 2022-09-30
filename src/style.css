@@ -20,7 +20,7 @@ header h1 {
 
 main {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  /* grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr)); */
   /* grid-auto-rows: max-content; */
 }
 
@@ -204,6 +204,10 @@ main .contenedorInfo .tercerDiv .contenedor .flecha {
   grid-column: 1 / 3;
   grid-row: 1 / 2;
   font-size: 5rem;
+}
+
+main .contenedorInfo .tercerDiv .contenedor .flecha img {
+color: white;
 }
 
 main .contenedorInfo .tercerDiv .contenedor .direccion {

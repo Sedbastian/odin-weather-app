@@ -59,7 +59,7 @@ function llamarBuscarCoordenadasDOM(event) {
       return;
     }
   }
-  
+
   const lat = document.querySelector("#latitud").value;
   const lon = document.querySelector("#longitud").value;
   requestInfoMeteoDOM(`Latidud: ${lat}, Longitud: ${lon}`, lat, lon);
@@ -278,7 +278,11 @@ function mostrarInfoMeteoDOM(response) {
 
     const flechaDiv = document.createElement("div");
     flechaDiv.classList.add("flecha");
-    flechaDiv.textContent = "\u{2B99}";
+
+    const flechaSvg = document.createElement("img");
+    flechaSvg.src = "./resources/navigation.svg";
+
+    flechaDiv.appendChild(flechaSvg);
     direccionContenedor.appendChild(flechaDiv);
 
     const deg = response.wind.deg;
