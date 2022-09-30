@@ -2,24 +2,30 @@ import {
   lugarAcoordenadas,
   infoMeteo,
   infoMeteoPronostico,
-  unidades
+  unidades,
 } from "./apisModule";
 
 import { format, fromUnixTime } from "date-fns";
-
-const buscarInput = document.querySelector("input");
 
 const contenedorInfo = document.createElement("div");
 contenedorInfo.classList.add("contenedorInfo");
 const divBuscar = document.querySelector("main");
 divBuscar.appendChild(contenedorInfo);
 
-function buscarLugarDOM() {
+function buscarLugarDOM(event) {
+  if (event.key !== undefined) {
+    if (event.key !== "Enter") {
+      return;
+    }
+  }
+
   const resultados = document.querySelector(".resultados");
   if (resultados) {
     resultados.remove();
   }
   contenedorInfo.textContent = "Buscando lugar...";
+
+  const buscarInput = document.querySelector("input");
 
   if (buscarInput.value.toLocaleLowerCase().includes("venancia")) {
     requestInfoMeteoDOM(
@@ -37,17 +43,23 @@ function buscarLugarDOM() {
       "-66.958122"
     );
   } else if (buscarInput.value.toLocaleLowerCase().includes("constancia")) {
-		requestInfoMeteoDOM(
-			"La Constancia, Delta del Tigre",
-			"-34.308113",
-			"-58.567997"
-		)
-	} else {
+    requestInfoMeteoDOM(
+      "La Constancia, Delta del Tigre",
+      "-34.308113",
+      "-58.567997"
+    );
+  } else {
     lugarAcoordenadas(buscarInput.value);
   }
 }
 
-function llamarBuscarCoordenadasDOM() {
+function llamarBuscarCoordenadasDOM(event) {
+  if (event.key !== undefined) {
+    if (event.key !== "Enter") {
+      return;
+    }
+  }
+  
   const lat = document.querySelector("#latitud").value;
   const lon = document.querySelector("#longitud").value;
   requestInfoMeteoDOM(`Latidud: ${lat}, Longitud: ${lon}`, lat, lon);
@@ -149,7 +161,7 @@ function mostrarInfoMeteoDOM(response) {
   const primerDiv = document.querySelector(".primerDiv");
 
   if (response.hasOwnProperty("weather")) {
-    response.weather.forEach(element => {
+    response.weather.forEach((element) => {
       if (element.hasOwnProperty("description")) {
         const descripcion = element.description;
         const enMayus =
@@ -163,7 +175,7 @@ function mostrarInfoMeteoDOM(response) {
       descriptionIcon.classList.add("icon");
       if (element.hasOwnProperty("icon")) {
         const img = document.createElement("img");
-        img.src = `http://openweathermap.org/img/wn/${element.icon}@4x.png`;
+        img.src = `https://openweathermap.org/img/wn/${element.icon}@4x.png`;
         descriptionIcon.appendChild(img);
       }
       primerDiv.appendChild(descriptionIcon);
@@ -272,9 +284,9 @@ function mostrarInfoMeteoDOM(response) {
     const deg = response.wind.deg;
     let direccionViento = "";
 
-    if (deg > 337.5 && deg <= 360 || deg >= 0 && deg <= 22.5) {
-			direccionViento = "Norte";
-			flechaDiv.style.transform = "rotate(180deg)";
+    if ((deg > 337.5 && deg <= 360) || (deg >= 0 && deg <= 22.5)) {
+      direccionViento = "Norte";
+      flechaDiv.style.transform = "rotate(180deg)";
     } else if (deg > 22.5 && deg <= 67.5) {
       direccionViento = "Nor-Este";
       flechaDiv.style.transform = "rotate(225deg)";
@@ -455,5 +467,5 @@ export {
   mostrarInfoMeteoPronosticoDOM,
   errorLugarAcoordenadasDOM,
   errorInfoMeteoDOM,
-  errorInfoMeteoPronosticoDOM
+  errorInfoMeteoPronosticoDOM,
 };
